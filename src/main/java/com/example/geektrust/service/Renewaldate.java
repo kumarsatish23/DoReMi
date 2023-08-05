@@ -2,9 +2,15 @@ package com.example.geektrust.service;
 
 import java.time.LocalDate;
 
+/**
+ * The Renewaldate class calculates renewal dates for different subscription plans.
+ */
 public class Renewaldate {
     private static final int BEFORE_REMINDER = 10;
 
+    /**
+     * Enumeration of subscription plans with their corresponding renewal months.
+     */
     public enum Plan {
         FREE(1),
         PERSONAL(1),
@@ -21,6 +27,9 @@ public class Renewaldate {
         }
     }
 
+    /**
+     * Container class for renewal dates of different subscription plans.
+     */
     public class RenewalDates {
         private LocalDate musicRenewalDate;
         private LocalDate videoRenewalDate;
@@ -45,6 +54,12 @@ public class Renewaldate {
         }
     }
 
+    /**
+     * Calculates renewal dates for the given subscription.
+     *
+     * @param sub The subscription for which to calculate renewal dates.
+     * @return An instance of RenewalDates containing the calculated renewal dates.
+     */
     public RenewalDates calculateRenewalDates(Subscription sub) {
         LocalDate startDate = sub.getStartDate();
 
