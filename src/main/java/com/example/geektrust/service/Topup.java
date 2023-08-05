@@ -5,7 +5,7 @@ public class Topup {
     private Integer months;
 
     public Topup() {
-        this("ONE_DEVICE", 0);
+        this("null", 0);
     }
 
     public Topup(String topupPlan, Integer months) {

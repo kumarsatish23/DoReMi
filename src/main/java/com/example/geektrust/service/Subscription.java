@@ -10,7 +10,7 @@ public class Subscription {
     private Topup topup;
 
     public Subscription() {
-        this(LocalDate.of(1998, 3, 20), "FREE", "FREE", "FREE", new Topup());
+        this(LocalDate.of(1998, 3, 20), null, null, null, new Topup());
     }
 
     public Subscription(LocalDate startDate, String musicPlan, String videoPlan, String podcastPlan, Topup topup) {
