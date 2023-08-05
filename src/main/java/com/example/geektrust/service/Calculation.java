@@ -1,10 +1,16 @@
 package com.example.geektrust.service;
 
+/**
+ * The Calculation class calculates the renewal amount for a subscription.
+ */
 public class Calculation {
     private static final int ONE_DEVICE_PRICE = 0;
     private static final int FOUR_DEVICE_PRICE = 50;
     private static final int TEN_DEVICE_PRICE = 100;
 
+    /**
+     * Enumeration of plan prices.
+     */
     private enum PlanPrice {
         FREE(0),
         PERSONAL(100),
@@ -21,6 +27,9 @@ public class Calculation {
         }
     }
 
+    /**
+     * Enumeration of top-up prices.
+     */
     private enum TopupPrice {
         ONE_DEVICE(ONE_DEVICE_PRICE),
         FOUR_DEVICE(FOUR_DEVICE_PRICE),
@@ -37,6 +46,12 @@ public class Calculation {
         }
     }
 
+    /**
+     * Calculates the total renewal amount for a subscription.
+     *
+     * @param subscribe The subscription for which to calculate the renewal amount.
+     * @return The total renewal amount.
+     */
     public Integer renewalAmount(Subscription subscribe) {
         int totalAmount = 0;
 

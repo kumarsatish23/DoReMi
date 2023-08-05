@@ -4,23 +4,39 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * The Service class manages subscription-related operations.
+ */
 public class Service {
     private Subscription data;
     private Renewaldate renewaldateCalculator;
     private Calculation renewalAmountCalculator;
 
+    /**
+     * Initializes the Service class.
+     */
     public Service() {
         this.data = new Subscription();
         this.renewaldateCalculator = new Renewaldate();
         this.renewalAmountCalculator = new Calculation();
     }
 
+    /**
+     * Process a list of input commands.
+     *
+     * @param inputs The list of input commands to process.
+     */
     public void DoReMi(List<String> inputs) {
         for (String i : inputs) {
             processInput(i);
         }
     }
 
+    /**
+     * Processes an input command.
+     *
+     * @param input The input command to process.
+     */
     private void processInput(String input) {
         if (input.contains("START_SUBSCRIPTION")) {
             LocalDate startDate = parseDate(input.split(" ")[1]);
@@ -43,6 +59,13 @@ public class Service {
         }
     }
 
+    /**
+     * Prints renewal details based on subscription data.
+     *
+     * @param data Subscription data.
+     * @param renewaldateCalculator Renewal date calculator.
+     * @param renewalAmountCalculator Renewal amount calculator.
+     */
     private void printRenewalDetails(Subscription data, Renewaldate renewaldateCalculator, Calculation renewalAmountCalculator) {
         Integer renewalAmount = renewalAmountCalculator.renewalAmount(data);
         Renewaldate.RenewalDates renewalDates = renewaldateCalculator.calculateRenewalDates(data);
@@ -68,6 +91,12 @@ public class Service {
         System.out.println(output.toString());
     }
 
+    /**
+     * Parses a date string into LocalDate format.
+     *
+     * @param dateString The date string to parse.
+     * @return The parsed LocalDate, or null if parsing fails.
+     */
     private static LocalDate parseDate(String dateString) {
         try {
             return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
