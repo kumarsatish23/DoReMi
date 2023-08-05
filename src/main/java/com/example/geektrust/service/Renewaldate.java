@@ -48,13 +48,24 @@ public class Renewaldate {
     public RenewalDates calculateRenewalDates(Subscription sub) {
         LocalDate startDate = sub.getStartDate();
 
-        int musicRenewalMonths = Plan.valueOf(sub.getMusicPlan()).getRenewalMonths();
-        int videoRenewalMonths = Plan.valueOf(sub.getVideoPlan()).getRenewalMonths();
-        int podcastRenewalMonths = Plan.valueOf(sub.getPodcastPlan()).getRenewalMonths();
+        LocalDate musicRenewalDate = null;
+        LocalDate videoRenewalDate = null;
+        LocalDate podcastRenewalDate = null;
 
-        LocalDate musicRenewalDate = startDate.plusMonths(musicRenewalMonths).minusDays(BEFORE_REMINDER);
-        LocalDate videoRenewalDate = startDate.plusMonths(videoRenewalMonths).minusDays(BEFORE_REMINDER);
-        LocalDate podcastRenewalDate = startDate.plusMonths(podcastRenewalMonths).minusDays(BEFORE_REMINDER);
+        if (sub.getMusicPlan() != null) {
+            int musicRenewalMonths = Plan.valueOf(sub.getMusicPlan()).getRenewalMonths();
+            musicRenewalDate = startDate.plusMonths(musicRenewalMonths).minusDays(BEFORE_REMINDER);
+        }
+
+        if (sub.getVideoPlan() != null) {
+            int videoRenewalMonths = Plan.valueOf(sub.getVideoPlan()).getRenewalMonths();
+            videoRenewalDate = startDate.plusMonths(videoRenewalMonths).minusDays(BEFORE_REMINDER);
+        }
+
+        if (sub.getPodcastPlan() != null) {
+            int podcastRenewalMonths = Plan.valueOf(sub.getPodcastPlan()).getRenewalMonths();
+            podcastRenewalDate = startDate.plusMonths(podcastRenewalMonths).minusDays(BEFORE_REMINDER);
+        }
 
         return new RenewalDates(musicRenewalDate, videoRenewalDate, podcastRenewalDate);
     }

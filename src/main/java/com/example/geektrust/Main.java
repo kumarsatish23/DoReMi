@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import com.example.geektrust.service.Service;
+import com.example.geektrust.service.SubscriptionProcessor;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,10 +16,8 @@ public class Main {
 
         try {
             List<String> inputs = readInputsFromFile(args[0]);
-            if (inputs != null) {
-                Service sub = new Service();
-                sub.DoReMi(inputs);
-            }
+            SubscriptionProcessor subscriptionProcessor = new SubscriptionProcessor();
+            subscriptionProcessor.processSubscriptions(inputs);
         } catch (IOException e) {
             System.out.println("An error occurred while reading the input file: " + e.getMessage());
         }

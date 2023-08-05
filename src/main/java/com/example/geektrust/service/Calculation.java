@@ -40,12 +40,28 @@ public class Calculation {
     public Integer renewalAmount(Subscription subscribe) {
         int totalAmount = 0;
 
-        totalAmount += PlanPrice.valueOf(subscribe.getMusicPlan()).getPrice();
-        totalAmount += PlanPrice.valueOf(subscribe.getVideoPlan()).getPrice();
-        totalAmount += PlanPrice.valueOf(subscribe.getPodcastPlan()).getPrice();
+        String musicPlan = subscribe.getMusicPlan();
+        if (musicPlan != null) {
+            totalAmount += PlanPrice.valueOf(musicPlan).getPrice();
+        }
+
+        String videoPlan = subscribe.getVideoPlan();
+        if (videoPlan != null) {
+            totalAmount += PlanPrice.valueOf(videoPlan).getPrice();
+        }
+
+        String podcastPlan = subscribe.getPodcastPlan();
+        if (podcastPlan != null) {
+            totalAmount += PlanPrice.valueOf(podcastPlan).getPrice();
+        }
 
         Topup topup = subscribe.getTopup();
-        totalAmount += TopupPrice.valueOf(topup.getTopupPlan()).getPrice() * topup.getMonths();
+        if (topup != null) {
+            String topupPlan = topup.getTopupPlan();
+            if (topupPlan != null) {
+                totalAmount += TopupPrice.valueOf(topupPlan).getPrice() * topup.getMonths();
+            }
+        }
 
         return totalAmount;
     }
